@@ -301,7 +301,7 @@ resource "aws_lb_listener" "external-elb" {
   }
 }
 
-/*resource "aws_db_instance" "default" {
+resource "aws_db_instance" "default" {
   allocated_storage      = 10
   db_subnet_group_name   = aws_db_subnet_group.default.id
   engine                 = "mysql"
@@ -323,7 +323,7 @@ resource "aws_db_subnet_group" "default" {
     Name = "My DB subnet group"
   }
 }
-*/
+
 
 output "lb_dns_name" {
   description = "The DNS name of the load balancer"
