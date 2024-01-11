@@ -327,19 +327,19 @@ resource "aws_lb_listener" "external-elb" {
   }
 }
 
-/*resource "aws_db_instance" "default" {
+resource "aws_db_instance" "default" {
   allocated_storage      = 10
   db_subnet_group_name   = aws_db_subnet_group.default.id
   engine                 = "mysql"
   engine_version         = "8.0.28"
   instance_class         = "db.t2.micro"
-  multi_az               = true
+  multi_az               = false
   db_name                = "mydb"
   username               = "raham"
   password               = "Rahamshaik#444555"
   skip_final_snapshot    = true
   vpc_security_group_ids = [aws_security_group.database-sg.id]
-}*/
+}
 
 resource "aws_db_subnet_group" "default" {
   name       = "main"
