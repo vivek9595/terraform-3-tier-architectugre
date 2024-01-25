@@ -188,6 +188,30 @@ resource "aws_instance" "appserver2" {
   }
 }
 
+resource "aws_db_instance" "default" {
+  allocated_storage      = 10
+  db_subnet_group_name   = aws_db_subnet_group.default.id
+  engine                 = "mysql"
+  engine_version         = "8.0.28"
+  instance_class         = "db.t2.micro"
+  multi_az               = false
+  db_name                = "mydb"
+  username               = "raham"
+  password               = "Rahamshaik#444555"
+  skip_final_snapshot    = true
+  vpc_security_group_ids = [aws_security_group.database-sg.id]
+}
+
+resource "aws_db_subnet_group" "default" {
+  name       = "main"
+  subnet_ids = [aws_subnet.database-subnet-1.id, aws_subnet.database-subnet-2.id]
+
+  tags = {
+    Name = "My DB subnet group"
+  }
+}
+
+
 # Create Web Security Group
 resource "aws_security_group" "webserver-sg" {
   name        = "webserver-sg"
@@ -327,28 +351,7 @@ resource "aws_lb_listener" "external-elb" {
   }
 }
 
-resource "aws_db_instance" "default" {
-  allocated_storage      = 10
-  db_subnet_group_name   = aws_db_subnet_group.default.id
-  engine                 = "mysql"
-  engine_version         = "8.0.28"
-  instance_class         = "db.t2.micro"
-  multi_az               = false
-  db_name                = "mydb"
-  username               = "raham"
-  password               = "Rahamshaik#444555"
-  skip_final_snapshot    = true
-  vpc_security_group_ids = [aws_security_group.database-sg.id]
-}
 
-resource "aws_db_subnet_group" "default" {
-  name       = "main"
-  subnet_ids = [aws_subnet.database-subnet-1.id, aws_subnet.database-subnet-2.id]
-
-  tags = {
-    Name = "My DB subnet group"
-  }
-}
 
 
 output "lb_dns_name" {
