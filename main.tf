@@ -38,7 +38,7 @@ resource "aws_subnet" "web-subnet-2" {
   availability_zone       = "us-east-1b"
   map_public_ip_on_launch = true
  tags = {
-    Name = "Web-2a"
+    Name = "Web-lb"
   }
 }
 
@@ -60,10 +60,9 @@ resource "aws_subnet" "application-subnet-2" {
   vpc_id                  = aws_vpc.my-vpc.id
   cidr_block              = "10.0.12.0/24"
   availability_zone       = "us-east-1b"
-  map_public_ip_on_launch = false
 
   tags = {
-    Name = "Application-2b"
+    Name = "Application-lb"
   }
 }
 
@@ -84,7 +83,7 @@ resource "aws_subnet" "database-subnet-2" {
   availability_zone = "us-east-1b"
 
   tags = {
-    Name = "Database-2b"
+    Name = "Database-lb"
   }
 }
 
@@ -138,7 +137,7 @@ resource "aws_instance" "webserver1" {
   ami                    = "ami-0d5eff06f840b45e9"
   instance_type          = "t2.micro"
   availability_zone      = "us-east-1a"
-  key_name               = "nvj"
+  key_name               = "yterraform"
   vpc_security_group_ids = [aws_security_group.webserver-sg.id]
   subnet_id              = aws_subnet.web-subnet-1.id
   user_data              = "${file("apache.sh")}"
@@ -152,7 +151,7 @@ resource "aws_instance" "webserver2" {
   ami                    = "ami-0d5eff06f840b45e9"
   instance_type          = "t2.micro"
   availability_zone      = "us-east-1b"
-  key_name               = "nvj"
+  key_name               = "yterraform"
   vpc_security_group_ids = [aws_security_group.webserver-sg.id]
   subnet_id              = aws_subnet.web-subnet-2.id
   user_data              = "${file("apache.sh")}"
@@ -167,7 +166,7 @@ resource "aws_instance" "appserver1" {
   ami                    = "ami-0d5eff06f840b45e9"
   instance_type          = "t2.micro"
   availability_zone      = "us-east-1a"
-  key_name               = "nvj"
+  key_name               = "yterraform"
   vpc_security_group_ids = [aws_security_group.appserver-sg.id]
   subnet_id              = aws_subnet.application-subnet-1.id
   tags = {
@@ -179,7 +178,7 @@ resource "aws_instance" "appserver2" {
   ami                    = "ami-0d5eff06f840b45e9"
   instance_type          = "t2.micro"
   availability_zone      = "us-east-1b"
-  key_name               = "nvj"
+  key_name               = "yterraform"
   vpc_security_group_ids = [aws_security_group.appserver-sg.id]
   subnet_id              = aws_subnet.application-subnet-2.id
 
@@ -361,7 +360,7 @@ output "lb_dns_name" {
 
 
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "batch4pmdevopswithaws202477"  
+  bucket = "batch4pmdevopswithaws2024764677"  
 
   acl    = "private"  
   versioning {
