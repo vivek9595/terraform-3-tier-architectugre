@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.47.0"
+      version = "5.57.0"
     }
   }
 }
@@ -193,7 +193,7 @@ resource "aws_db_instance" "default" {
   engine               = "mysql"
   engine_version       = "8.0.35"
   instance_class       = "db.t3.micro"
-  username             = "foo"
+  username             = "admin"
   password             = "Raham#123568i"
   skip_final_snapshot  = true
 }
@@ -357,10 +357,10 @@ output "lb_dns_name" {
 
 
 resource "aws_s3_bucket" "example" {
-  bucket = "rahamtestbycketterra7788abcdef"
+  bucket = "rahamtestbycketterra7788abcdefxxc"
 
   tags = {
-    Name        = "rahamtestbycketterra7788abcdef"
+    Name        = "rahamtestbycketterra7788abcdefxxc"
     Environment = "Dev"
   }
 }
